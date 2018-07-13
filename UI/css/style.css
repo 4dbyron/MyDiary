@@ -17,7 +17,7 @@ a {
   transition: .5s ease;
 }
 a:hover {
-  color: #179b77;
+  color: #0f71ba;
 }
 
 .form {
@@ -53,11 +53,11 @@ a:hover {
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #179b77;
+  background: #0f71ba;
   color: #ffffff;
 }
 .tab-group .active a {
-  background: #1ab188;
+  background: #0f71ba;
   color: #ffffff;
 }
 
@@ -153,13 +153,13 @@ textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #1ab188;
+  background: #0f71ba;
   color: #ffffff;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #179b77;
+  background: #0f71ba;
 }
 
 .button-block {
@@ -188,7 +188,7 @@ textarea {
 }
 #cssmenu {
   width: auto;
-  height: 59px;
+  height: 50px;
   padding-bottom: 4px;
 }
 #cssmenu.align-right {
@@ -218,13 +218,13 @@ textarea {
   background: #0f71ba;
 }
 #cssmenu #bg-two {
-  height: 59px;
+  height: 50px;
   z-index: 2;
   background: url('images/bg.png');
 }
 #cssmenu #bg-three {
   bottom: 4px;
-  height: 55px;
+  height: 50px;
   z-index: 3;
   background: #222222;
   background: -moz-linear-gradient(top, #555555 0%, #222222 100%);
@@ -236,12 +236,12 @@ textarea {
 }
 #cssmenu #bg-four {
   bottom: 4px;
-  height: 55px;
+  height: 50px;
   z-index: 4;
   background: url('images/bg.png');
 }
 #cssmenu ul {
-  height: 59px;
+  height: 50px;
 }
 #cssmenu ul li {
   float: left;
