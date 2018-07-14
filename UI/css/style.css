@@ -278,6 +278,7 @@ textarea {
   background: url('images/bg.png');
   color: #ffffff;
 }
+<<<<<<< HEAD
 
 .about{
   text-align: center;
@@ -287,3 +288,6 @@ textarea {
   text-align: left;
 
 }
+=======
+h3, h4, h2 {text-align: center}
+>>>>>>> 0f9e5ce28cb3c6aaece7fcb927cdf3c0fa87c262
