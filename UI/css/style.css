@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background: 'images/bg.jpg';
+  background: 'images/bg.png';
   font-family: 'Titillium Web', sans-serif;
 }
 
@@ -277,4 +277,13 @@ textarea {
 #cssmenu ul li.active > a {
   background: url('images/bg.png');
   color: #ffffff;
+}
+
+.about{
+  text-align: center;
+}
+#aheading{
+  text-decoration: underline;
+  text-align: left;
+
 }

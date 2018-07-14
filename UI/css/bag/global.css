@@ -1,0 +1,87 @@
+/* Global Styling */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+* {
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
+    background: none;
+    box-shadow: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.4rem;
+    font-family: 'Roboto', sans-serif;
+    color: #222;
+    background-image: 'images/bg.png';
+    letter-spacing: .05rem;
+    line-height: 2rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+.a-left {
+    text-align-last: left;
+}
+
+.a-right {
+    text-align: right;
+}
+
+.a-center {
+    text-align: center;
+}
+
+.small-spacing {
+    height: 2.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-weight: 300;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+.tiny-title {
+    margin-bottom: 1rem;
+}
+
+.cta-btn {
+    background-color: #FF6839;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.8rem;
+    padding: 1.2rem 3rem;
+    color: #fff;
+}
+
+.thumbnail img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.cta-btn:hover {
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.big-title {
+    font-weight: 400;
+    font-size: 3rem;
+}
+
+.r-btn {
+    padding-right: 10rem;
+}
