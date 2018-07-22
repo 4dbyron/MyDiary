@@ -1,81 +1,67 @@
-<!DOCTYPE html>
-<html lang="en" >
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyDiary</title>
-  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel="stylesheet" href="css/stylesheet.css">
-      <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-      <script src="js/navbar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyDiary | Profile</title>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/profile.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.min.css">
+    <script src="js/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="js/navbar.js" type="text/javascript"></script>
+
+    <!--Navigation Bar-->
+    <div id='cssmenu'>
+        <ul>
+            <li><a href='index.html'><span>MyDiary</span></a></li>
+            <li><a href='entries.html'><span>Entries</span></a></li>
+            <li class='active'><a href='profile.html'><span>Profile</span></a></li>
+            <li class='last'><a href='index.html'><span> | Sign Out</span></a></li>
+        </ul>
+    </div>
 </head>
 
 <body background="images/bg.png">
 
-  <div id='cssmenu'>
-  <ul>
-     <li><a href='index.html'><span>MyDiary</span></a></li>
-     <li class='active'><a href='profile.html'><span>Profile</span></a></li>
-     <li><a href='entries.html'><span>Entries</span></a></li>
-     <li class='last'><a href='index.html'><span> | Sign Out</span></a></li>
-  </ul>
-  </div>
 
-    <main role="main">
-        <div class="container col-1">
+<div id="DivContainer">
+    <div class="ProfileDiv" id="userProf">
+        <p>Byron Taaka</p>
+        <img src="images/profile.png" alt="Profile Picture"/>
 
-            <div class="wrapper info">
-                <div class="user-info-one">
-                    <h2 class="user-name">Andelan</h2>
-                    <p class="user-about">Great when it comes to logical thinkig</p>
-                </div>
-                <div class="user-info-two">
-                    <div class="email">
-                        <b>Email:</b>
-                        <span> 4dbyron@gmail.com</span>
-                    </div>
-                    <div class="memberSince">
-                        <b>Joined:</b>
-                        <span>9/07/2018</span>
-                    </div>
-                    <div class="city">
-                        <b>City:</b>
-                        <span> Nakuru</span>
-                    </div>
-                </div>
-            </div>
-            <div class="wrapper" id="toggle_settings">
-                <h3>Reminder Settings</h3>
-                <div class="inner-notsat">
-                    <p>
-                        <b>Notification</b>
-                    </p>
-                    <div class="notification-switch">
-                        <div class="switch-group">
-                            <input type="checkbox" id="onOff">
-                            <label for="onOff"></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="wrapper">
-                <h3>Entries History</h3>
-                <div class="inner-notsat">
-                    <p>
-                        <b>Number Of Entries Created Since Joining:</b>
-                    </p>
-                    <div class="statistics-figure-wrap">
-                        <p class="statistics-figure">
-                            <b>8</b>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script src="./js/custom.js"></script>
+
+        <button class="ProfileDiv" id="btnProfPic"
+                onclick="alert('Not Database exists so far to store your profile picture')">Change Avatar
+        </button>
+
+    </div>
+    <div class="ProfileDiv" id="userDetails">
+        Nick: &emsp;&ensp; Byron<br/>
+        Email: &emsp; 4dbyron@gmail.com<br/>
+        Joined: &emsp;9/07/2018<br/>
+
+        <p><br/>
+            You have Created <b>8</b> entries since Joining<br/>
+            You currently have <b>7</b> entries<br/>
+        </p>
+
+        <button class="ProfileDiv" id="btnPassword"
+                onclick="location.href='update_password.html'">Change Password
+        </button>
+
+    </div>
+    <div class="ProfileDiv" id="userSettings"><p></p>
+        <h4>Receive Daily Reminders</h4><br/>
+        <label class="notify">
+            <input type="checkbox">
+            <span class="reminder round"></span>
+        </label>
+    </div>
+</div>
+
+
+<script src='js/jquery.min.js'></script>
+<script src="js/index.js"></script>
+
 </body>
-
 </html>
