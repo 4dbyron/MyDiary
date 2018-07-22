@@ -1,0 +1,129 @@
+
+#DivContainer {
+    width: 50%;
+    height: 80%;
+    padding-top: 60px;
+    border: 1px solid green;
+    margin-left: 25%;
+    position: relative;
+    bottom: 0%;
+
+}
+
+#UserProf {
+    width: 49%;
+    height: 65%;
+    border: 1px solid green;
+    float: left;
+    margin-left: 0.5%;
+    text-align: center;
+}
+
+#userDetails {
+    width: 49%;
+    height: 65%;
+    border: 1px solid red;
+    float: right;
+    margin-right: 0.5%
+}
+
+#userSettings {
+    width: 100%;
+    height: 32%;
+    border: 1px solid blue;
+    clear: both;
+    text-align: center;
+
+}
+
+.ProfileDiv {
+    position: relative;
+}
+
+.ProfileDiv button {
+    position: absolute;
+    bottom: 0;
+    border: 0;
+    outline: none;
+    border-radius: 0;
+    padding: 4px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: #0f71ba;
+    color: #ffffff;
+    transition: all 0.5s ease;
+    -webkit-appearance: none;
+}
+
+#btnPassword {
+    left: 25%;
+}
+
+#btnProfPic {
+    left: 25%;
+}
+
+img {
+    width: 60%;
+    height: 60%;
+}
+
+.notify {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.notify input {
+    display: none;
+}
+
+.reminder {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.reminder:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .reminder {
+    background-color: #2196F3;
+}
+
+input:focus + .reminder {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .reminder:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.reminder.round {
+    border-radius: 34px;
+}
+
+.reminder.round:before {
+    border-radius: 50%;
+}

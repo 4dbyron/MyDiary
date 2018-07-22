@@ -1,112 +1,145 @@
-<!DOCTYPE html>
-<html lang="en" >
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyDiary</title>
-  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-      <link rel="stylesheet" href="css/stylesheet.css">
-      <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-      <script src="js/navbar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyDiary | Entries</title>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/entries.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.min.css">
+    <script src="js/jquery-latest.min.js" type="text/javascript"></script>
+    <script src="js/navbar.js" type="text/javascript"></script>
+
+
+    <!--Navigation Bar-->
+    <div id='cssmenu'>
+        <ul>
+            <li><a href='index.html'><span>MyDiary</span></a></li>
+            <li class='active'><a href='entries.html'><span>Entries</span></a></li>
+            <li><a href='profile.html'><span>Profile</span></a></li>
+            <li class='last'><a href='index.html'><span> | Sign Out</span></a></li>
+        </ul>
+    </div>
+
 </head>
 
 <body background="images/bg.png">
 
-  <div id='cssmenu'>
-  <ul>
-     <li><a href='index.html'><span>MyDiary</span></a></li>
-     <li><a href='profile.html'><span>Profile</span></a></li>
-     <li class='active'><a href='entries.html'><span>Entries</span></a></li>
-     <li class='last'><a href='index.html'><span>Sign Out</span></a></li>
-  </ul>
-  </div>
+<div class="DivTable">
+    <div class="Title">
+        <p>My Entries</p>
+    </div>
+    <div>
+        <button onclick="location.href='new_entry.html'">Add An Entry</button>
+    </div>
 
-  <main role="main" >
-        <div class="container col-2" >
-            <div class="content" style="width:800px">
-                <p class="tiny-title">3 Entries</p>
-                <div class="diary-entry">
-                    <div class="header">
-                        <h4 class="title">Andela Values.</h4>
-                        <div class="edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </div>
-                    </div>
-                    <h5 class="category">
-                        <span class="color"></span>Career</h5>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus provident ad id culpa nobis
-                        dicta accusantium ipsa magnam facere reiciendis, quos voluptate eligendi numquam.</p>
-                    <div class="notice">
-                        <div class="fav">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="timer">Last updated - 23 hours ago</div>
-                        <div class="details-btn">
-                            <a href="./entry_content.html">
-                                <button>View Entry Content</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="diary-entry">
-                    <div class="header">
-                        <h4 class="title">My Impostor Syndrome</h4>
-                        <div class="edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </div>
-                    </div>
-                    <h5 class="category">
-                        <span class="color"></span>Personal</h5>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus provident ad id culpa nobis
-                        dicta accusantium ipsa magnam facere reiciendis, quos voluptate eligendi numquam.</p>
-                    <div class="notice">
-                        <div class="fav">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="timer">Last updated - 5 days ago</div>
-                        <div class="details-btn">
-                            <a href="./entry_content.html">
-                                <button>View Entry Content</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="diary-entry">
-                    <div class="header">
-                        <h4 class="title">Will I ever get the courage?</h4>
-                        <div class="edit">
-                            <i class="fas fa-pencil-alt"></i>
-                        </div>
-                    </div>
-                    <h5 class="category">
-                        <span class="color"></span>Personality</h5>
-                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem accusamus provident ad id culpa nobis
-                        dicta accusantium ipsa magnam facere reiciendis, quos voluptate eligendi numquam.</p>
-                    <div class="notice">
-                        <div class="fav">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <div class="timer">Last updated - 6 days ago</div>
-                        <div class="details-btn">
-                            <a href="./entry_content.html">
-                                <button>View Entry Content</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!--Headings-->
+    <div class="Heading">
+        <div class="Cell">
+            <p>ID</p>
         </div>
-        <a href="#">
-            <div class="float-btn mobile-show">
-                <i class="fas fa-plus"></i>
-            </div>
-        </a>
-    </main>
-    <script src="js/index.js"></script>
-</body>
+        <div class="Cell">
+            <p>Category</p>
+        </div>
+        <div class="Cell">
+            <p>Title</p>
+        </div>
 
+        <div class="Cell">
+            <p>Description</p>
+        </div>
+
+        <div class="Cell">
+            <p>Created On</p>
+        </div>
+
+        <div class="Cell">
+            <p>Last Modified</p>
+        </div>
+
+        <div class="Cell">
+            <p>Action</p>
+        </div>
+    </div>
+
+    <!--Rows-->
+
+    <!--row1-->
+    <div class="Row">
+        <div class="Cell">
+            <p>1</p>
+        </div>
+        <div class="Cell">
+            <p>Career</p>
+        </div>
+        <div class="Cell">
+            <p>Andela PreBootCamp</p>
+        </div>
+        <div class="Cell">
+            <p>So there I was, ....</p>
+        </div>
+        <div class="Cell">
+            <p>14/06/2018</p>
+        </div>
+        <div class="Cell">
+            <p>16/06/2018</p>
+        </div>
+        <div class="Cell">
+            <p><a href="entry_content.html">View</a> | <a href="modify_entry.html" class="link">Modify</a></p>
+        </div>
+    </div>
+    <!--row2-->
+    <div class="Row">
+        <div class="Cell">
+            <p>2</p>
+        </div>
+        <div class="Cell">
+            <p>Life</p>
+        </div>
+        <div class="Cell">
+            <p>Love</p>
+        </div>
+        <div class="Cell">
+            <p>I have tried, not once or twice. but whenever I approach her..</p>
+        </div>
+        <div class="Cell">
+            <p>2/07/2018</p>
+        </div>
+        <div class="Cell">
+            <p>2/07/2018</p>
+        </div>
+        <div class="Cell">
+            <p><a href="entry_content.html">View</a> | <a href="modify_entry.html" class="link">Modify</a></p>
+        </div>
+    </div>
+
+    <!--row2-->
+    <div class="Row">
+        <div class="Cell">
+            <p>3</p>
+        </div>
+        <div class="Cell">
+            <p>Life</p>
+        </div>
+        <div class="Cell">
+            <p>Love</p>
+        </div>
+        <div class="Cell">
+            <p>I think I need a psychiatrist. last night I almost gave in to...</p>
+        </div>
+        <div class="Cell">
+            <p>3/07/2018</p>
+        </div>
+        <div class="Cell">
+            <p>3/07/2018</p>
+        </div>
+        <div class="Cell">
+            <p><a href="entry_content.html">View</a> | <a href="modify_entry.html" class="link">Modify</a></p>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
 </html>
