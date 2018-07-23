@@ -1,15 +1,20 @@
 language: python
 python:
+    - "2.7"
     - "3.6"
 
 # Install the following packages(dependencies)
 install:
+    - pip install -U pip
+
+#Just before running script
+before_script:
     - pip install -r requirements.txt
+    - pytest api/tests.py --cov=api
 
 # Run tests
 script:
-    - pytest
-    - py.test --cov=API/api
+    - py.test api/tests.py -v --cov api --cov-report term-missing
     
 # Mark it as tested successfully with coveralls
 after_success:
