@@ -1,21 +1,18 @@
 language: python
 python:
-    - "2.7"
-    - "3.6"
+  - "3.6.2"
+cache: pip
 
 # Install the following packages(dependencies)
 install:
-    - pip install -U pip
-
-#Just before running script
-before_script:
-    - pip install -r requirements.txt
-    - pytest api/tests.py --cov=api
+  - pip install -r requirements.txt
+  - pip install coveralls
+  - pip install coverage
 
 # Run tests
 script:
-    - py.test api/tests.py -v --cov api --cov-report term-missing
+    - nosetests --with-coverage --cover-tests --cover-package=tests
     
 # Mark it as tested successfully with coveralls
 after_success:
-- coveralls
+  - coveralls
