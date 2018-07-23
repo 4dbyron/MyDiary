@@ -1,0 +1,16 @@
+language: python
+python:
+    - "3.6"
+
+# Install the following packages(dependencies)
+install:
+    - pip install -r requirements.txt
+
+# Run tests
+script:
+    - pytest
+    - py.test --cov=API/api
+    
+# Mark it as tested successfully with coveralls
+after_success:
+- coveralls
