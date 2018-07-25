@@ -6,6 +6,7 @@ body {
     display: table;
     position: absolute;
     left: 5%;
+    background-color: white;
 
 }
 
@@ -20,6 +21,7 @@ body {
     display: table-row;
     font-weight: bold;
     text-align: center;
+    background-color: lightblue;
 }
 
 .Row {
@@ -54,94 +56,6 @@ body {
     font-size: small;
     text-align: end;
     color: navy;
-}
-
-.button {
-    border-radius: 0;
-    padding: 2% 0;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    background: #0f71ba;
-    color: #ffffff;
-    transition: all 0.9s ease;
-    width: 100%;
-}
-
-label {
-    position: absolute;
-    -webkit-transform: translateY(6px);
-    transform: translateY(6px);
-    left: 13px;
-    color: rgba(255, 255, 255, 0.5);
-    transition: all 0.25s ease;
-    -webkit-backface-visibility: hidden;
-    pointer-events: none;
-    font-size: 22px;
-}
-
-label .req {
-    margin: 2px;
-    color: #1ab188;
-}
-
-label.active {
-    -webkit-transform: translateY(50px);
-    transform: translateY(50px);
-    left: 2px;
-    font-size: 14px;
-}
-
-label.active .req {
-    opacity: 0;
-}
-
-label.highlight {
-    color: #ffffff;
-}
-
-input, textarea {
-    font-size: 22px;
-    display: block;
-    width: 100%;
-    height: 100%;
-    padding: 5px 10px;
-    border: 1px solid #a0b3b0;
-    color: #ffffff;
-    border-radius: 0;
-    transition: border-color .25s ease, box-shadow .25s ease;
-}
-
-input:focus, textarea:focus {
-    outline: 0;
-    border-color: #1ab188;
-}
-
-textarea {
-    border: 2px solid #a0b3b0;
-    resize: vertical;
-}
-
-.field-wrap {
-    position: relative;
-    margin-bottom: 40px;
-}
-
-.top-row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.top-row > div {
-    float: left;
-    width: 48%;
-    margin-right: 4%;
-}
-
-.top-row > div:last-child {
-    margin: 0;
 }
 
 .DivDel {

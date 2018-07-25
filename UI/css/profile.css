@@ -1,19 +1,20 @@
 
 #DivContainer {
-    width: 50%;
+    width: 40%;
     height: 80%;
     padding-top: 60px;
-    border: 1px solid green;
-    margin-left: 25%;
+    border: 0px;
+    margin-left: 30%;
     position: relative;
     bottom: 0%;
+    background-color: aliceblue;
 
 }
 
 #UserProf {
     width: 49%;
     height: 65%;
-    border: 1px solid green;
+    border: 0px;
     float: left;
     margin-left: 0.5%;
     text-align: center;
@@ -22,17 +23,18 @@
 #userDetails {
     width: 49%;
     height: 65%;
-    border: 1px solid red;
+    border: 0px;
     float: right;
+    margin-left: 0%;
     margin-right: 0.5%
 }
 
 #userSettings {
     width: 100%;
     height: 32%;
-    border: 1px solid blue;
+    padding-left: 15%;
     clear: both;
-    text-align: center;
+    text-align: left;
 
 }
 
@@ -43,22 +45,10 @@
 .ProfileDiv button {
     position: absolute;
     bottom: 0;
-    border: 0;
-    outline: none;
-    border-radius: 0;
-    padding: 4px 0;
-    font-size: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    background: #0f71ba;
-    color: #ffffff;
-    transition: all 0.5s ease;
-    -webkit-appearance: none;
 }
 
 #btnPassword {
-    left: 25%;
+    left: 0%;
 }
 
 #btnProfPic {
@@ -66,8 +56,8 @@
 }
 
 img {
-    width: 60%;
-    height: 60%;
+    width: 80%;
+    height: 65%;
 }
 
 .notify {

@@ -88,9 +88,9 @@ label .req {
   color: #1ab188;
 }
 
-label.active {
-  -webkit-transform: translateY(50px);
-          transform: translateY(50px);
+label.active, .activated {
+  -webkit-transform: translateY(-20px);
+          transform: translateY(-20px);
   left: 2px;
   font-size: 14px;
 }
@@ -141,29 +141,6 @@ textarea {
 }
 .top-row > div:last-child {
   margin: 0;
-}
-
-.button {
-  border: 0;
-  outline: none;
-  border-radius: 0;
-  padding: 10px 0;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  background: #0f71ba;
-  color: #ffffff;
-  transition: all 0.5s ease;
-  -webkit-appearance: none;
-}
-.button:hover, .button:focus {
-  background: #0f71ba;
-}
-
-.button-block {
-  display: block;
-  width: 100%;
 }
 
 .forgot {

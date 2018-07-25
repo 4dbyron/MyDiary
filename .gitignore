@@ -36,3 +36,7 @@ instance/
 .scrapy
 
 .python-version
+
+# Byron Taaka's
+draft.txt
+.idea
