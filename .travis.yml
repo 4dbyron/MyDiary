@@ -1,18 +1,36 @@
 language: python
 python:
-  - "3.6.2"
+  - "3.6"
 cache: pip
 
 # Install the following packages(dependencies)
 install:
   - pip install -r requirements.txt
-  - pip install coveralls
-  - pip install coverage
 
 # Run tests
 script:
-    - nosetests --with-coverage --cover-tests --cover-package=tests
+ - pytest
+    - py.test --cov=api
     
 # Mark it as tested successfully with coveralls
 after_success:
-  - coveralls
+- coveralls
+
+
+language: python
+python:
+    - "3.6"
+
+
+# Install dependencies
+install:
+    - pip install -r requirements.txt
+
+# Run tests
+script:
+    - pytest
+    - py.test --cov=api --with
+
+
+after_success:
+- coveralls

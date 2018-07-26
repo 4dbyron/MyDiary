@@ -4,6 +4,11 @@ MyDiary is an online journal where users can pen down their thoughts and feeling
 
 [![Coverage Status](https://coveralls.io/repos/github/4dbyron/MyDiary/badge.svg?branch=developer)](https://coveralls.io/github/4dbyron/MyDiary?branch=developer)
 
+[![Build Status](https://travis-ci.org/4dbyron/MyDiary.svg?branch=developer)](https://travis-ci.org/4dbyron/MyDiary)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/7ef8acd847da1bd0fdf4/maintainability)](https://codeclimate.com/github/4dbyron/MyDiary/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7ef8acd847da1bd0fdf4/test_coverage)](https://codeclimate.com/github/4dbyron/MyDiary/test_coverage)
 
 
 ## Getting Started
@@ -44,10 +49,29 @@ e.g <br/>
 ```sensible-browser index.html```
 
 #### 2. The Application Programmable Interface
-- Will be added in due Time.
+#####once the repository has been cloned
+ - Navigate to the *api* folder/directory 
+	with `cd MyDiary/api` command 
+	or 
+	with your File Explorer.
+ - [Install and Setup your virtual environment](https://docs.python-guide.org/dev/virtualenvs/)
+ - run 
+	`pytest -v`
+	or
+	`pytest -v test_app.py`
+	or
+	`python -m pytest test_app.py`
+
+### Testin With Postman
+- Start the server with `python app.py`
+- launch Postman and enter in the desired endpoint to test.
+Example `GET /entries` fetches all entries.
+to achieve this with postman, you would to a GET request URL as:
+```127.0.0.1:5000/api/v1/entries```
 
 
-## UI Built With
+
+### UI Built With
 - HTML
 - CSS
 - Javascript
