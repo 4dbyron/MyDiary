@@ -40,3 +40,5 @@ instance/
 # Byron Taaka's
 draft.txt
 .idea
+api/__pycache__
+apt/.pytest_cache
