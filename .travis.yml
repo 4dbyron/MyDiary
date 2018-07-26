@@ -29,7 +29,7 @@ install:
 # Run tests
 script:
     - pytest
-    - py.test --cov=api --with
+    - py.test --cov=api
 
 
 after_success:
