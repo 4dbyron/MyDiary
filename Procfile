@@ -1,1 +1,1 @@
-web: gunicorn api.v1.diary:app
+web: gunicorn api:app
