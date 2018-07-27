@@ -30,42 +30,14 @@ entries = [
 
 class Entry(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('title', type=str, required=True, help="A title seems to be lacking"),
-    parser.add_argument('description', type=str, required=True, help="Please give the description.")
-
-    # root : GET /
-    '''Return details about the api server'''
-
-    @app.route('/')
-    def root(self):
-        return """ [
-            {'AppName': 'MyDiary'},
-            {'Version': 1},
-            {'Author': 'Byron Taaka'},
-            {'Email' : '4dbyron@gmail.com'},
-            {'host' : 'localhost or github.com or heroku'},
-            {'Endpoints': '/api/v1/entries'}]
-            """
+    parser.add_argument('title', type=str, required=True, help="Content Missing"),
+    parser.add_argument('description', type=str, required=True, help="Content Description Missing.")
 
     """get a specific diary entry"""
 
     def get(self, entry_id):
         entry = next(filter(lambda x: x['entry_id'] == entry_id, entries), None)
-        return {'entry': entries}, 200 if entry else 404
-
-    """post a new diary entry"""
-
-    def post(self, entry_id):
-        if next(filter(lambda x: x['entry_id'] == entry_id, entries), None):
-            return {'message': "An entry with ID '{}' already exists.".format(entry_id)}, 400
-
-        data = Entry.parser.parse_args()
-
-        entry = {'entry_id': entry_id,
-                 'title': data['title'],
-                 'description': data['description']}
-        entries.append(entry)
-        return entry, 201
+        return {'entry': entry}, 200 if entry else 404
 
     """modify an entry"""
 
@@ -75,11 +47,11 @@ class Entry(Resource):
         entry = next(
             filter(lambda x: x['entry_id'] == entry_id, entries), None)
         if entry is None:
+            return 'entry not found', 404
+        else:
             entry = {'entry_id': entry_id,
                      'title': data['title'],
                      'description': data['description']}
-            entries.append(entry)
-        else:
             entry.update(data)
         return entry, 200
 
@@ -96,6 +68,31 @@ class Entries(Resource):
 
     def get(self):
         return {'entries': entries}
+
+    """post a new diary entry"""
+
+    def post(self):
+        data = Entry.parser.parse_args()
+
+        entry = {'entry_id': 12, 'title': data['title'], 'description': data['description']}
+        entries.append(entry)
+        return entry, 201
+
+
+# root : GET /
+'''Return details about the api server'''
+
+
+@app.route('/')
+def root():
+    return """ [
+        {'AppName': 'MyDiary'},
+        {'Version': 1},
+        {'Author': 'Byron Taaka'},
+        {'Email' : '4dbyron@gmail.com'},
+        {'host' : 'localhost or github.com or heroku'},
+        {'Endpoints': '/api/v1/entries'}]
+        """
 
 
 api.add_resource(Entry, '/api/v1/entries/<int:entry_id>')
