@@ -31,7 +31,7 @@ entries = [
 class Entry(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('title', type=str, required=True, help="Content Missing"),
-    parser.add_argument('description', type=str, required=True, help="Content Description.")
+    parser.add_argument('description', type=str, required=True, help="Content Description Missing.")
 
     """get a specific diary entry"""
 
