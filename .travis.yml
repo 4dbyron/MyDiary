@@ -8,7 +8,7 @@ install:
 
 # Run tests
 script:
-  - python -m pytest --cov-report term-missing --cov=app
+  - pytest --cov-report term-missing --cov=api
 
     
 # Mark it as tested successfully with coveralls
