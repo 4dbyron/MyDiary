@@ -1,7 +1,6 @@
 language: python
 python:
   - "3.6"
-cache: pip
 
 # Install the following packages(dependencies)
 install:
@@ -9,28 +8,11 @@ install:
 
 # Run tests
 script:
- - pytest
-    - py.test --cov=api
+  - pytest --cov-report term-missing --cov=api
+
     
 # Mark it as tested successfully with coveralls
 after_success:
-- coveralls
+  - coveralls
 
-
-language: python
-python:
-    - "3.6"
-
-
-# Install dependencies
-install:
-    - pip install -r requirements.txt
-
-# Run tests
-script:
-    - pytest
-    - py.test --cov=api --with
-
-
-after_success:
-- coveralls
+cache: pip
