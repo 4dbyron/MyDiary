@@ -1,4 +1,4 @@
-"""Tests for get all entries"""
+"""Tests for all entries"""
 import json
 import unittest
 
