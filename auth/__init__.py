@@ -90,3 +90,25 @@ def create_app(config_name):
             if the_entry['user_id'] == current_user["id"]:
                 user_entries.append(the_entry)
         return jsonify(user_entries)
+
+    app.route(url_path + "/entries/<entry_id>", methods=["GET"])
+    @token_required
+    def get_single_entry(current_user, entry_id):
+        """Fetch a user entry"""
+        entry_model = entry(app.config.get('DB'))
+        entry_data = entry_model.get_all()
+        available = False
+        response = {"message": "Entry not found"}
+
+        for the_entry in entry_data:
+            if int(the_entry["id"]) == int(entry_id):
+                available = True
+                if int(the_entry["user_id"]) == int(current_user["id"]):
+                    response = the_entry
+                else:
+                    return jsonify({"message": "You cannot access an entry that is not yours"}), 401
+
+        if not available:
+            return jsonify(response), 400
+        return jsonify(response)
+
