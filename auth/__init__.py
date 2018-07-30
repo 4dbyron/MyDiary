@@ -48,3 +48,23 @@ def create_app(config_name):
             return func(current_user, *args, **kwags)
 
         return decorated
+
+    @app.route(url_path + "/auth/login", methods=["POST"])
+    def login():
+        """User Login"""
+        user_ = user(app.config.get('DB'))
+        user_data = user_.get_all()
+        auth = request.authorization
+        resp = None
+        token = None
+        for mUser in user_data:
+            if mUser and auth and auth["username"] == mUser["username"] and \
+                    check_password_hash(mUser["password"], auth["password"]):
+                token = jwt.encode({"username": mUser["username"],
+                                    'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)},
+                                   app.config.get("SECRET"))
+                resp = jsonify({"token": token.decode("UTF-8")})
+        if token is None:
+            resp = jsonify({"message": "token missing, could not login"})
+            resp.status_code = 401
+        return resp
