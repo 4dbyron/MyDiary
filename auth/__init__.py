@@ -68,3 +68,25 @@ def create_app(config_name):
             resp = jsonify({"message": "token missing, could not login"})
             resp.status_code = 401
         return resp
+
+    @app.route(url_path + "/auth/signup", methods=['POST'])
+    def create_user():
+        """Register a User : `POST /auth/signup` """
+        data = request.get_json()
+        user_obj = user(app.config.get('DB'))
+        hashed_password = generate_password_hash(data["password"], method="sha256")
+        user_obj.create(data["username"], hashed_password)
+        return jsonify({"message": "Account Created Successfully"}), 201
+
+    @app.route(url_path + "/entries", methods=["GET"])
+    @token_required
+    def get_entries(current_user):
+        """GET all entries for a user"""
+        entry_model = entry(app.config.get('DB'))
+        data = {}
+        data = entry_model.get_all()
+        user_entries = []
+        for the_entry in data:
+            if the_entry['user_id'] == current_user["id"]:
+                user_entries.append(the_entry)
+        return jsonify(user_entries)
