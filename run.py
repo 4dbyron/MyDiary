@@ -1,4 +1,8 @@
-# app__init__.py
+"""
+This allows you to run app in three different flavour(Environment)
+each with its own level of verbosity
+app__init__.py
+"""
 
 import os
 from auth import create_app
