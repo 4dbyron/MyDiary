@@ -68,12 +68,3 @@ def create_app(config_name):
             resp = jsonify({"message": "token missing, could not login"})
             resp.status_code = 401
         return resp
-
-    @app.route(url_path + "/auth/signup", methods=['POST'])
-    def create_user():
-        """Register a User : `POST /auth/signup` """
-        data = request.get_json()
-        user_obj = user(app.config.get('DB'))
-        hashed_password = generate_password_hash(data["password"], method="sha256")
-        user_obj.create(data["username"], hashed_password)
-        return jsonify({"message": "Account Created Successfully"}), 201
