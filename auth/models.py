@@ -54,10 +54,9 @@ class user(object):
         self.save()
 
     def save(self):
-        """save user after creation or modification"""
+        """save user data after Creation or Modification"""
         conn = psycopg2.connect(self.db_name)
         cursor = conn.cursor()
-        # save data
         cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)",
                        (self.username, self.password,)
                        )
