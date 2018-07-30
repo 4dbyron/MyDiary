@@ -48,3 +48,32 @@ def create_app(config_name):
             return func(current_user, *args, **kwags)
 
         return decorated
+
+    @app.route(url_path + "/auth/login", methods=["POST"])
+    def login():
+        """User Login"""
+        user_ = user(app.config.get('DB'))
+        user_data = user_.get_all()
+        auth = request.authorization
+        resp = None
+        token = None
+        for mUser in user_data:
+            if mUser and auth and auth["username"] == mUser["username"] and \
+                    check_password_hash(mUser["password"], auth["password"]):
+                token = jwt.encode({"username": mUser["username"],
+                                    'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=120)},
+                                   app.config.get("SECRET"))
+                resp = jsonify({"token": token.decode("UTF-8")})
+        if token is None:
+            resp = jsonify({"message": "token missing, could not login"})
+            resp.status_code = 401
+        return resp
+
+    @app.route(url_path + "/auth/signup", methods=['POST'])
+    def create_user():
+        """Register a User : `POST /auth/signup` """
+        data = request.get_json()
+        user_obj = user(app.config.get('DB'))
+        hashed_password = generate_password_hash(data["password"], method="sha256")
+        user_obj.create(data["username"], hashed_password)
+        return jsonify({"message": "Account Created Successfully"}), 201

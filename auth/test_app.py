@@ -24,7 +24,7 @@ class TestEndPoints(unittest.TestCase):
         self.table_model.create_tables()
 
         # inti app
-        self.app = create_app(configName="testing")
+        self.app = create_app(config_name="testing")
         self.client = self.app.test_client
 
         # user login details
