@@ -121,3 +121,24 @@ def create_app(config_name):
         entry_model = entry(app.config.get('DB'))
         entry_model.create(data["title"], data["content"], current_user["id"])
         return jsonify({"message": "Entry Created Successfully"}), 201
+
+    @app.route(url_path + "/entries/<entry_id>", methods=["PUT"])
+    @token_required
+    def modify_entry(current_user, entry_id):
+        """Modify / Update an Entry"""
+        entry_model = entry(app.config.get('DB'))
+        data = request.get_json()
+        entry_data = entry_model.get_all()
+        available = False
+        for the_entry in entry_data:
+            if int(the_entry["id"]) == int(entry_id):
+                available = True
+                if int(the_entry["user_id"]) == int(current_user["id"]):
+                    entry_model.update(id=entry_id, title=data["title"], content=data["content"])
+                else:
+                    return jsonify({"message": "You cannot modify an entry that is not yours"}), 401
+
+        if not available:
+            return jsonify({"message": "the entry does not exist"}), 401
+        else:
+            return jsonify({"message": "Entry updated successfully"})
