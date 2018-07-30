@@ -92,6 +92,7 @@ def create_app(config_name):
         return jsonify(user_entries)
 
     app.route(url_path + "/entries/<entry_id>", methods=["GET"])
+
     @token_required
     def get_single_entry(current_user, entry_id):
         """Fetch a user entry"""
@@ -112,3 +113,11 @@ def create_app(config_name):
             return jsonify(response), 400
         return jsonify(response)
 
+    @app.route(url_path + "/entries", methods=['POST'])
+    @token_required
+    def create_entry(current_user):
+        """Create  an Entry"""
+        data = request.get_json()
+        entry_model = entry(app.config.get('DB'))
+        entry_model.create(data["title"], data["content"], current_user["id"])
+        return jsonify({"message": "Entry Created Successfully"}), 201
