@@ -18,19 +18,14 @@ class TestUsers(unittest.TestCase):
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.data = {
-            "name": "byron taaka",
+            "name": "byrontaaka",
             "username": "byron",
-            "password": "1234",
+            "password": "12341234",
             "email": "4dbyron@gmail.com"
         }
-        
+
     def test_user_signup(self):
         """test post user register data"""
-        # user signup
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps(self.data), content_type='application/json')
-        self.assertEqual(rs.status_code, 201)
-        rp = json.loads(rs.data)
-        self.assertEqual(rp["message"], "Registration was successful")
 
         # existing user
         results = self.client.post('/api/v1/auth/signup', data=json.dumps(self.data), content_type='application/json')
@@ -40,26 +35,34 @@ class TestUsers(unittest.TestCase):
 
         # test username available
         rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
-            "name": "", "username": "byron", "password": "1234", "email": "4dbyron@gmail.com"}),
-            content_type='application/json')
+            "name": "", "username": "byron", "password": "12341234", "email": "4dbyron@gmail.com"}),
+                              content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
         # test name validation
         rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
-            "name": "byron taaka", "username": " ", "password": "1234", "email": "4dbyron@gmail.com"}),
-            content_type='application/json')
+            "name": "byrontaaka", "username": " ", "password": "12341234", "email": "4dbyron@gmail.com"}),
+                              content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
         # test password
         rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
-            "name": "byron taaka", "username": "byron", "password": " ", "email": "4dbyron@gmail.com"}),
-            content_type='application/json')
+            "name": "byrontaaka", "username": "byron", "password": " ", "email": "4dbyron@gmail.com"}),
+                              content_type='application/json')
         self.assertEqual(rs.status_code, 400)
         # tests email validation
         rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
-            "name": "byron taaka", "username": "byron", "password": "1234", "email": " "}),
-            content_type='application/json')
-        self.assertEqual(rs.status_code, 400)   
+            "name": "byrontaaka", "username": "byron", "password": "12341234", "email": " "}),
+                              content_type='application/json')
+        self.assertEqual(rs.status_code, 400)
+
+        # user signup
+        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+            "name": "tester", "username": "tester", "password": "12341234", "email": "tester@gmail.com"}),
+                              content_type='application/json')
+        self.assertEqual(rs.status_code, 201)
+        rp = json.loads(rs.data)
+        self.assertEqual(rp["message"], "Registration was successful")
 
     def tearDown(self):
         db.query("SELECT * FROM users WHERE username = %s", [self.data['username']])

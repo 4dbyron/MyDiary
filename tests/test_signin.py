@@ -18,12 +18,12 @@ class TestUsers(unittest.TestCase):
         self.app_context.push()
         self.data = {
             "username": "byron",
-            "password": "1234"
+            "password": "12341234"
         }
         self.data2 = {
-            "name": "byron taaka",
+            "name": "byrontaaka",
             "username": "byron",
-            "password": "1234",
+            "password": "12341234",
             "email": "4dbyron@gmail.com"
         }
 
