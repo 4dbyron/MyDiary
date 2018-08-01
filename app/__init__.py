@@ -4,7 +4,7 @@ import datetime
 from functools import wraps
 
 import jwt
-from auth.models import user, entry
+from app.models import user, entry
 # custom imports
 from env.config import app_config
 from flask import Flask, request, jsonify
@@ -16,7 +16,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def create_app(config_name):
     app = Flask("__name__")
     app.config.from_object(app_config[config_name])
-    app.config.from_pyfile("child/config.py")
+    app.config.from_pyfile("env/config.py")
     url_path = "/api/v2"
 
     """ No data should be served to the api user without a token 
@@ -49,7 +49,7 @@ def create_app(config_name):
 
         return decorated
 
-    @app.route(url_path + "/auth/login", methods=["POST"])
+    @app.route(url_path + "/app/login", methods=["POST"])
     def login():
         """User Login"""
         user_ = user(app.config.get('DB'))
@@ -69,9 +69,9 @@ def create_app(config_name):
             resp.status_code = 401
         return resp
 
-    @app.route(url_path + "/auth/signup", methods=['POST'])
+    @app.route(url_path + "/app/signup", methods=['POST'])
     def create_user():
-        """Register a User : `POST /auth/signup` """
+        """Register a User : `POST /app/signup` """
         data = request.get_json()
         user_obj = user(app.config.get('DB'))
         hashed_password = generate_password_hash(data["password"], method="sha256")

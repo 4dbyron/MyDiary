@@ -1,11 +1,11 @@
-"""Test auth api endpoints #159383638"""
+"""Test app api endpoints #159383638"""
 
 import json
 import unittest
 
-from auth.models import db_table
+from app.models import db_table
 
-from auth import create_app
+from app import create_app
 
 
 class TestEndPoints(unittest.TestCase):
@@ -34,10 +34,10 @@ class TestEndPoints(unittest.TestCase):
             {'content-type': "application/json", "title": "Andela", "content": "This Is Andela"})
 
         # init/signup user tester with password 1234 and email tester@gmail.com
-        user_res = self.client().post(self.path + "/auth/signup", data=self.user_details,
+        user_res = self.client().post(self.path + "/app/signup", data=self.user_details,
                                       content_type="application/json")
         # Generate token when the user logs in
-        resp_token = self.client().post(self.path + "/auth/login",
+        resp_token = self.client().post(self.path + "/app/login",
                                         headers={"content-type": "application/json",
                                                  "Authorization": "Basic dGVzdGVyOjEyMzQ="})  # tester:1234 base64
 
@@ -53,22 +53,22 @@ class TestEndPoints(unittest.TestCase):
         self.table_model.drop_all()
 
     def test_post_login(self):
-        res = self.client().post(self.path + "/auth/login", headers={
+        res = self.client().post(self.path + "/app/login", headers={
             "content-type": "application/json",
             "Authorization": "Basic dGVzdGVyOjEyMzQ="}  # tester:1234 base64 encoded
                                  )
         self.assertEqual(res.status_code, 200)
 
     def test_post_login_invalid(self):
-        res = self.client().post(self.path + "/auth/login", headers={
+        res = self.client().post(self.path + "/app/login", headers={
             "Content-Type": "application/json",
             "Authorization": "Basic dGVzdGVyOjEyMzM="}  # tester:1233 instead or tester:1234
                                  )
         self.assertNotEqual(res.status_code, 200)
 
-    # create a new account: `POST  /auth/signup`
+    # create a new account: `POST  /app/signup`
     def test_signup(self):
-        res = self.client().post(self.path + "/auth/signup",
+        res = self.client().post(self.path + "/app/signup",
                                  data=json.dumps({"username": "andela", "password": "andela"}),
                                  content_type='application/json')
         self.assertEqual(res.status_code, 201)
