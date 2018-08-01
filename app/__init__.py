@@ -43,13 +43,14 @@ def create_app(configuration):
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
     app.config.from_object(config_app[configuration])
-
     from app.resources.entries_resource import AllEntries, SingleEntry
     from app.resources.user_resource import SigninResource, SignupResource
 
-    api.add_resource(SignupResource, '/api/v1/auth/signup')
-    api.add_resource(SigninResource, '/api/v1/auth/signin')
-    api.add_resource(AllEntries, '/api/v1/entries')
-    api.add_resource(SingleEntry, '/api/v1/entries/<int:entry_id>')
+    path = "/api/v1"
+
+    api.add_resource(SignupResource, path+'/auth/signup')
+    api.add_resource(SigninResource, path+'/auth/signin')
+    api.add_resource(AllEntries, path+'/entries')
+    api.add_resource(SingleEntry, path+'/entries/<int:entry_id>')
 
     return app
