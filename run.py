@@ -2,15 +2,20 @@
 This allows you to run app in three different flavour(Environment)
 each with its own level of verbosity
 
-app__init__.py
+    usage
+            `export APP_SETTINGS="testing"`
+            `export SECRET="OwnDarkSecret"`
+            # where APP_SETTINGS can be testing, production or development
+
+            or
+                source .env
+
 """
-
-
 import os
-from auth import create_app
+from app import create_app
 
-app_name = os.getenv("APP_SETTINGS")
-app = create_app(config_name=app_name)
+app_config = os.getenv('APP_SETTINGS')
+app = create_app(app_config)
 
 if __name__ == "__main__":
     app.run()

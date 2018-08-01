@@ -21,7 +21,6 @@ coverage.xml
 .pytest_cache/
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -30,7 +29,6 @@ env.bak/
 venv.bak/
 
 # Flask
-instance/
 .webassets-cache
 
 .scrapy
