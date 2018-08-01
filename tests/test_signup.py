@@ -4,9 +4,9 @@ import json
 import os
 import psycopg2
 
-from app import create_app, DbConnection
+from app import create_app, DB_conns
 
-db = DbConnection()
+db = DB_conns()
 
 
 class TestUsers(unittest.TestCase):
