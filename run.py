@@ -7,6 +7,9 @@ each with its own level of verbosity
             `export SECRET="OwnDarkSecret"`
             # where APP_SETTINGS can be testing, production or development
 
+            or
+                source .env
+
 """
 import os
 from app import create_app
