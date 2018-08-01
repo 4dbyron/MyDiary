@@ -30,7 +30,6 @@ env.bak/
 venv.bak/
 
 # Flask
-instance/
 .webassets-cache
 
 .scrapy
