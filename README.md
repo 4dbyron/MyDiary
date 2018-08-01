@@ -50,25 +50,59 @@ e.g <br/>
 
 #### 2. The Application Programmable Interface
 #####once the repository has been cloned
- - Navigate to the *api* folder/directory 
-	with `cd MyDiary/api` command 
-	or 
-	with your File Explorer.
- - [Install and Setup your virtual environment](https://docs.python-guide.org/dev/virtualenvs/)
- - run 
+   execute:
+ - `virtualenv venv
+ - `source venv/bin/activate`
+ - `pip install -r MyDiary/requirements.txt`
+
+ after the requirements have been installed,
+ - Navigate to the *MyDiary* folder/directory
+	with `cd MyDiary` command
+ - You will be prompted to accept the environment setup
+    - reply with `Y` or `y`
+ - switch to user postgres with:
+    - `sudo -i -u postgres` or `su postgres`
+ -create database with:
+    -  `psql -c 'CREATE DATABASE "my_diary";' -U postgres`<br/>
+    or
+    `createdb my_diary`
+
+ - Create a user to access the database with:<br>
+    - psql -c "CREATE USER byron WITH PASSWORD 1234 createdb;" -U postgres
+    where: `byron` is you user name and `1234` is the password
+ - Create tables in the database with:<br>
+    - `python manage.py`<br>
+ - Launch the server with:
+    - python run.py
+
+ You can copy paste this for a quick setup<br/>
+ ```
+ git clone https://github.com/4dbyron/MyDiary.git
+ virtualenv venv
+ source venv/bin/activate
+ pip install -r MyDiary/requirements.txt
+ cd MyDiary/
+ sudo -i -u postgres || su postgres
+ psql -c 'CREATE DATABASE "my_diary";' -U postgres || createdb my_diary
+ psql -c "CREATE USER byron WITH PASSWORD 1234 createdb;" -U postgres
+ python manage.py
+ python run.py
+
+ ```
+For Tests, run:
+
 	`pytest -v`
 	or
 	`pytest -v test_app.py`
 	or
 	`python -m pytest test_app.py`
 
-### Testin With Postman
-- Start the server with `python app.py`
+### Testing With Postman
+- Start the server with `python run.py`
 - launch Postman and enter in the desired endpoint to test.
 Example `GET /entries` fetches all entries.
 to achieve this with postman, you would to a GET request URL as:
 ```127.0.0.1:5000/api/v1/entries```
-
 
 
 ### UI Built With
@@ -96,4 +130,4 @@ for now, reviewing the pull requests will one way of doing so.
 * [Andela Kenya](andela.com)
 * MaryAnne Ng'ang'a
 * Eugene Mutai
-
+* James Lemayian

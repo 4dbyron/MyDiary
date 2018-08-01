@@ -15,7 +15,7 @@ def is_logged_in(f):
         # initially, set token value to none
         token = None
         if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
+            token = request.headers.get('x-access-token')
         else:
             return {'message': "missing token"}, 401
         try:

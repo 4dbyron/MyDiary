@@ -7,7 +7,6 @@ from passlib.hash import sha256_crypt
 import jwt
 from app.instance.config import Config
 
-
 db = DB_conns()
 
 
@@ -21,7 +20,7 @@ class SignupResource(Resource):
         required=True,
         trim=True,
         type=inputs.regex(r"(.*\S.*)"),
-        help='Enter a Valid Name')
+        help='Enter a Valid Full Name')
     parser.add_argument(
         'email',
         required=True,
@@ -73,12 +72,12 @@ class SigninResource(Resource):
         'username',
         required=True,
         trim=True,
-        help='Enter a valid username')
+        help='User Name not Valid')
     parser.add_argument(
         'password',
         required=True,
         trim=True,
-        help='Enter a valid password')
+        help='Check password length: should be at least 6 chars long')
 
     def post(self):
         results = SigninResource.parser.parse_args()
@@ -94,12 +93,11 @@ class SigninResource(Resource):
             password = data[4]
             if sha256_crypt.verify(password_entered, password):
                 # Generate a token for the user
-                user_id = int(data[0])                
+                user_id = int(data[0])
                 token = jwt.encode(
-                    {'user_id': user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)},
-                    str(Config.SECRET))                
-                return {'message': 'You have successfully logged in',
-                        'token': token.decode('UTF-8')}, 201
+                    {'user_id': user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=200)},
+                    str(Config.SECRET))
+                return {'message': 'You have successfully logged in', 'token': token.decode('UTF-8')}, 201
             else:
                 return {'message': 'Invalid password'}, 400
         else:
