@@ -5,12 +5,12 @@ from app.models import Users, Entries
 from app import DB_conns
 from passlib.hash import sha256_crypt
 import jwt
-from app.instance.config import Config
+from app.settings.config import Config
 
 db = DB_conns()
 
 
-class SignupResource(Resource):
+class Sign_up_res(Resource):
     """Register A New User"""
 
     # validate the provided data format
@@ -24,7 +24,7 @@ class SignupResource(Resource):
     parser.add_argument("password", required=True, trim=True, help="Password Missing")
 
     def post(self):
-        sats = SignupResource.parser.parse_args()
+        sats = Sign_up_res.parser.parse_args()
         username = sats.get("username")
         password = sats.get("password")
         email = sats.get('email')
@@ -48,7 +48,7 @@ class SignupResource(Resource):
             return {'message': "The user already exists"}, 400
 
 
-class SigninResource(Resource):
+class Sign_in_res(Resource):
     """Sign in"""
 
     # Validate user login details
@@ -58,7 +58,7 @@ class SigninResource(Resource):
         'password', required=True, trim=True, help='Check password length: should be at least 6 chars long')
 
     def post(self):
-        results = SigninResource.parser.parse_args()
+        results = Sign_in_res.parser.parse_args()
         username = results.get('username')
         password_entered = results.get('password')
 

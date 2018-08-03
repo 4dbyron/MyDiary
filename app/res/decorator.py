@@ -4,7 +4,7 @@ from functools import wraps
 import jwt
 from flask import request
 from app import DB_conns
-from app.instance.config import Config
+from app.settings.config import Config
 
 db = DB_conns()
 

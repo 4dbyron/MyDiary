@@ -3,7 +3,7 @@ from flask import jsonify, request
 from flask_restful import reqparse, Resource
 from app.models import Users, Entries
 from app import DB_conns
-from app.resources.decorator import is_logged_in
+from app.res.decorator import is_logged_in
 
 db = DB_conns()
 
