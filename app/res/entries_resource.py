@@ -41,7 +41,7 @@ class AllEntries(Resource):
         entry = Entries.get(user_id=user_id)
         if entry:
             return {
-                'message': 'Entries found', 'entry': Entries.make_dict(entry)}, 201
+                'message': 'Entries found', 'entry': Entries.pack_results(entry)}, 201
         else:
             return {'message': 'Entries not found'}, 404
 
@@ -69,7 +69,7 @@ class SingleEntry(Resource):
         entry = Entries.get(user_id=user_id, entry_id=entry_id)
         if entry:
             return {
-                'message': 'Entry found', 'entry': Entries.make_dict(entry)}
+                'message': 'Entry found', 'entry': Entries.pack_results(entry)}
         else:
             return {'message': 'You do not have access to entry' + entry_id}, 403
 

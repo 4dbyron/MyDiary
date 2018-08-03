@@ -11,30 +11,30 @@ db = DB_conns()
 class Users:
     """Create Users"""
 
-    def __init__(self, name, username, email, password):
-        self.name = name
+    def __init__(self, username, email, password):
         self.username = username
         self.email = email
         self.password = sha256_crypt.encrypt(str(password))
 
     def signup_user(self):
         db.query(
-            "INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)",
-            (self.name, self.email, self.username, self.password))
+            "INSERT INTO users(email, username, password) VALUES(%s, %s, %s, %s)",
+            (self.email, self.username, self.password))
+
 
 class Entries:
     """Read / Write entries"""
 
-    def __init__(self, user_id, title, story):
+    def __init__(self, user_id, title, body):
         self.user_id = user_id
         self.title = title
-        self.story = story
+        self.body = body
 
     def post(self):
         """add an entry to DB"""
         db.query(
-            "INSERT INTO entries(user_id, title, story) VALUES(%s, %s, %s)",
-            (self.user_id, self.title, self.story))
+            "INSERT INTO entries(user_id, title, body) VALUES(%s, %s, %s)",
+            (self.user_id, self.title, self.body))
 
     @staticmethod
     def get(user_id, entry_id=None):
@@ -57,15 +57,12 @@ class Entries:
             return entry
 
     @staticmethod
-    def make_dict(user_entries):
+    def pack_results(user_entries):
         entries = []
         for entry in user_entries:
-            new_dict = {}
-            new_dict.update({
-                'entry_id': entry[0],
-                'title': entry[2],
-                'story': entry[3],
-                'date_created': entry[4].strftime("%A, %d %B, %Y")
-            })
-            entries.append(new_dict)
+            new_package = {}
+            new_package.update({'entry_id': entry[0], 'title': entry[2], 'body': entry[3],
+                                'date_created': entry[4].strftime("%A, %d %B, %Y")
+                                })
+            entries.append(new_package)
         return entries
