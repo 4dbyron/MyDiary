@@ -1,0 +1,252 @@
+FORMAT: 1A
+HOST: https://love-mydiary.herokuapp.com/
+
+# MyDiary API
+MyDiary is a simple API that powers [MyDiary User Interface](https://4dbyron.github.io/MyDiary/UI/).
+Howerver, it is not limited to that, you can use it in whatever way you deem fit.<br/>
+
+## About MyDiary App
+[MyDiary](https://4dbyron.github.io/MyDiary/UI/) is an online journal where users can pen down their thoughts and feelings.
+It provides the user with options to Add, View, Modify or even Delete their entries in the diary.
+
+MyDiary is designed with simplicity and clarity in mind. This is spiced up with a layer of Security builtin as a core feature rather than a addon feature.
+
+### MyDairy Security And Privacy
+In todays' world privacy and data protection is core to any software that is well designed.
+Mydiary ensures this through the following measures.
+- For a user to create an entry, the have to register first then login.
+- Login data is sanitized before being sent to the database.
+- Only a user with a valid token can manipulate entries
+
+# Working With MyDiary API.
+
+## Sign Up [POST /api/v1/auth/signup]
+
+Register new user with
+
++ Request (application/json)
+
+        {
+            "username" : "byron",
+            "password" : "12341234",
+            "email":"your_email@example.com"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/auth/signup
+
+    + Body
+
+            {
+                "message": "Registration was successful"
+            }
+
+## Sign In User [POST /api/v1/auth/signin]
+
+Login
+
++ Request (application/json)
+
+        {
+            "username" : "byron",
+            "password" : "12341234"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/auth/signin
+
+    + Body
+
+            {
+                "message": "You have successfully logged in",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+
+## Fetch User entries [GET /api/v1/entries]
+
+returns all entries for that user
+
++ Request (application/json)
+
+        {
+            "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries
+
+    + Body
+
+            {
+                "message": "Entries found",
+                "entry": [
+                    {
+                        "entry_id": 2,
+                        "title": "TIA",
+                        "story": "This is Andela",
+                        "date_created": "Friday, 03 August, 2018"
+            },
+                    {
+                        "entry_id": 3,
+                        "title": "TIA",
+                        "story": "This is Andela",
+                        "date_created": "Friday, 03 August, 2018"
+                    }
+                ]
+            }
+
+
+## Fetch a Single User Entry [GET /api/v1/entries/1]
+
+returns an entry with the given id
+
++ Request (application/json)
+
+        {
+            "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries/1
+
+    + Body
+
+            {
+                "message": "Entries found",
+                "entry": [
+                    {
+                        "entry_id": 1,
+                        "title": "Andela",
+                        "story": "This is Andela",
+                        "date_created": "Friday, 03 August, 2018"
+            },
+                    {
+                        "entry_id": 2,
+                        "title": "TIA",
+                        "story": "This is Andela sasa",
+                        "date_created": "Friday, 03 August, 2018"
+                    }
+            ]
+            }
+
+
+## Post a New Entry [POST /entries]
+
+Adds a new entry to MyDiary
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries
+            
+    + Body
+
+            {
+            "message": "You have successfully posted the entry",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+
+## Modify An Entry [PUT /api/v1/entries/3]
+
+changes the content of an entry
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries/3
+            
+    + Body
+
+            {
+                "message": "You have successfully updated the entry",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+## Detete An Entry [DELETE /api/v1/entries/2 ]
+this removes an entry from MyDiary's entry list
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries/2
+            
+    + Body
+
+            {
+                "message": "You have successfully Deleted the entry",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+
+
+### Frequenty Asked Questions [/api/v1/faq]
+
+## Do I have to pay to use this API? [GET /api/v1/faq/1]
+
++ Request (application/json)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/faq/1
+            
+    + Body
+
+            {
+                "message": "This API is free to use or redistribute"
+            }
+
+
+
+
+## Why do I get an error message when I try to post? [GET /api/v1/faq/10]
+
++ Request (application/json)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/faq/10
+            
+    + Body
+
+            {
+                "message": "Please ensure you have a valid token by loging in first"
+            }
