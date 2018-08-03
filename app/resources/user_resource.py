@@ -11,52 +11,37 @@ db = DB_conns()
 
 
 class SignupResource(Resource):
-    """Regester A New User"""
+    """Register A New User"""
 
     # validate the provided data format
     parser = reqparse.RequestParser()
-    parser.add_argument(
-        'name',
-        required=True,
-        trim=True,
-        type=inputs.regex(r"(.*\S.*)"),
-        help='Enter a Valid Full Name')
-    parser.add_argument(
-        'email',
-        required=True,
-        type=inputs.regex(
-            r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"),
-        help="Please Enter a Valid Email!")
-    parser.add_argument(
-        'username',
-        required=True,
-        trim=True,
-        help="Please Enter a valid User Name!")
-    parser.add_argument(
-        'password',
-        required=True,
-        trim=True,
-        help='Please Check You Password Format!')
+
+    parser.add_argument("email", required=True,
+                        type=inputs.regex(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"),
+                        help="Valid Email Missing!")
+    parser.add_argument("username", required=True, type=str, trim=True,
+                        help="User Name should not be contain alphabets")
+    parser.add_argument("password", required=True, trim=True, help="Password Missing")
 
     def post(self):
         sats = SignupResource.parser.parse_args()
-        name = sats.get('name')
-        username = sats.get('username')
-        password = sats.get('password')
+        username = sats.get("username")
+        password = sats.get("password")
         email = sats.get('email')
 
         # Validate fields data
+        if len(username < 3 & password < 6):
+            return {'message': "User Name and Password are too short"}, 400
         if len(username) < 3:
-            return {'message': 'User name too short'}, 400
+            return {'message': "User name too short, should be at least 3 chars long"}, 400
         if len(password) < 6:
-            return {'message': 'Password to short'}, 400
+            return {'message': "Password too short, should be at least 6 chars long"}, 400
 
         # redirect to signup if email does not exist
         db.query("SELECT * FROM users WHERE email = %s OR username = %s", [email, username])
         data = db.cur.fetchone()
         if not data:
-            user = Users(
-                name=name, email=email, username=username, password=password)
+            user = Users(email=email, username=username, password=password)
             Users.signup_user(user)
             return {'message': "Registration was successful"}, 201
         else:
@@ -68,16 +53,9 @@ class SigninResource(Resource):
 
     # Validate user login details
     parser = reqparse.RequestParser()
+    parser.add_argument('username', required=True, trim=True, help='User Name Missing')
     parser.add_argument(
-        'username',
-        required=True,
-        trim=True,
-        help='User Name not Valid')
-    parser.add_argument(
-        'password',
-        required=True,
-        trim=True,
-        help='Check password length: should be at least 6 chars long')
+        'password', required=True, trim=True, help='Check password length: should be at least 6 chars long')
 
     def post(self):
         results = SigninResource.parser.parse_args()
@@ -97,9 +75,9 @@ class SigninResource(Resource):
                 token = jwt.encode(
                     {'user_id': user_id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=200)},
                     str(Config.SECRET))
-                return {'message': 'You have successfully logged in', 'token': token.decode('UTF-8')}, 201
+                return {'message': "You have successfully logged in", "token": token.decode("UTF-8")}, 201
             else:
-                return {'message': 'Invalid password'}, 400
+                return {'message': "Wrong Password"}, 400
         else:
-            return {'message': 'User not found'}, 400
+            return {'message': "User not yet registered"}, 400
         db.close()

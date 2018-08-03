@@ -17,14 +17,14 @@ def is_logged_in(f):
         if 'x-access-token' in request.headers:
             token = request.headers.get('x-access-token')
         else:
-            return {'message': "missing token"}, 401
+            return {'message': "token missing"}, 401
         try:
             # tokenize the Secret key
             data = jwt.decode(token, Config.SECRET)
             m_user_id = data["user_id"]
 
         except:
-            return {"message": " invalid token"}, 400
+            return {"message": " invalid token, sign in afresh to get a new one"}, 400
 
         return f(user_id=m_user_id, *args, **kwargs)
 

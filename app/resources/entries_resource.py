@@ -14,25 +14,24 @@ class AllEntries(Resource):
     parser.add_argument(
         'title',
         required=True,
-        type=str,
         trim=True,
-        help='Invalid title')
+        help='Entry title missing')
 
     parser.add_argument(
-        'story',
+        'body',
         required=True,
         type=str,
         trim=True,
-        help='Give some description for this story')
+        help='Entry body missing')
 
     @is_logged_in
     def post(self, user_id):
         results = AllEntries.parser.parse_args()
         title = results.get('title')
-        story = results.get('story')
+        body = results.get('body')
 
         # Add post to database
-        entry = Entries(title=title, user_id=user_id, story=story)
+        entry = Entries(title=title, user_id=user_id, body=body)
         entry.post()
         return {'message': 'The Entry has been posted successfully'}, 201
 
@@ -57,11 +56,11 @@ class SingleEntry(Resource):
         else:
             results = request.get_json()
             new_title = results['title']
-            new_story = results['story']
+            new_body = results['body']
 
             db.query(
-                "UPDATE entries SET title=%s, story=%s WHERE entry_id=%s",
-                (new_title, new_story, entry_id))
+                "UPDATE entries SET title=%s, body=%s WHERE entry_id=%s",
+                (new_title, new_body, entry_id))
             return{'message': 'Entry has been updated successfully'}, 200
 
     @is_logged_in
@@ -72,14 +71,14 @@ class SingleEntry(Resource):
             return {
                 'message': 'Entry found', 'entry': Entries.make_dict(entry)}
         else:
-            return {'message': 'Entry not found'}, 404        
+            return {'message': 'You do not have access to entry' + entry_id}, 403
 
     @is_logged_in
     def delete(self, user_id, entry_id):
-        """This method is used to delte an entry"""
+        """This method is used to delete an entry"""
         entry = Entries.get(user_id=user_id, entry_id=entry_id)
         if not entry:
-            return {'message': 'Entry not found'}, 404
+            return {'message': 'You do not have access to entry'+entry_id}, 403
         else:
             db.query(
                 "DELETE FROM entries WHERE entry_id=%s", [entry_id]
