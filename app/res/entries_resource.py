@@ -1,9 +1,13 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and http://flask.pocoo.org/
+"""
+
 import json
 from flask import jsonify, request
 from flask_restful import reqparse, Resource
 from app.models import Users, Entries
 from app import DB_conns
-from app.resources.decorator import is_logged_in
+from app.res.decorator import is_logged_in
 
 db = DB_conns()
 
@@ -12,27 +16,19 @@ class AllEntries(Resource):
     """Validate 'All entries' query request"""
     parser = reqparse.RequestParser()
     parser.add_argument(
-        'title',
-        required=True,
-        type=str,
-        trim=True,
-        help='Invalid title')
+        'title', required=True, trim=True, help='Entry title missing')
 
     parser.add_argument(
-        'story',
-        required=True,
-        type=str,
-        trim=True,
-        help='Give some description for this story')
+        'body', required=True, type=str, trim=True, help='Entry body missing')
 
     @is_logged_in
     def post(self, user_id):
         results = AllEntries.parser.parse_args()
         title = results.get('title')
-        story = results.get('story')
+        body = results.get('body')
 
         # Add post to database
-        entry = Entries(title=title, user_id=user_id, story=story)
+        entry = Entries(title=title, user_id=user_id, body=body)
         entry.post()
         return {'message': 'The Entry has been posted successfully'}, 201
 
@@ -42,7 +38,7 @@ class AllEntries(Resource):
         entry = Entries.get(user_id=user_id)
         if entry:
             return {
-                'message': 'Entries found', 'entry': Entries.make_dict(entry)}, 201
+                'message': 'Entries found', 'entry': Entries.pack_results(entry)}, 201
         else:
             return {'message': 'Entries not found'}, 404
 
@@ -57,11 +53,11 @@ class SingleEntry(Resource):
         else:
             results = request.get_json()
             new_title = results['title']
-            new_story = results['story']
+            new_body = results['body']
 
             db.query(
-                "UPDATE entries SET title=%s, story=%s WHERE entry_id=%s",
-                (new_title, new_story, entry_id))
+                "UPDATE entries SET title=%s, body=%s WHERE entry_id=%s",
+                (new_title, new_body, entry_id))
             return{'message': 'Entry has been updated successfully'}, 200
 
     @is_logged_in
@@ -70,16 +66,16 @@ class SingleEntry(Resource):
         entry = Entries.get(user_id=user_id, entry_id=entry_id)
         if entry:
             return {
-                'message': 'Entry found', 'entry': Entries.make_dict(entry)}
+                'message': 'Entry found', 'entry': Entries.pack_results(entry)}
         else:
-            return {'message': 'Entry not found'}, 404        
+            return {'message': 'You do not have access to entry' + entry_id}, 403
 
     @is_logged_in
     def delete(self, user_id, entry_id):
-        """This method is used to delte an entry"""
+        """This method is used to delete an entry"""
         entry = Entries.get(user_id=user_id, entry_id=entry_id)
         if not entry:
-            return {'message': 'Entry not found'}, 404
+            return {'message': 'You do not have access to entry'+entry_id}, 403
         else:
             db.query(
                 "DELETE FROM entries WHERE entry_id=%s", [entry_id]

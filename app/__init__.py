@@ -1,6 +1,10 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+"""
 from flask import Flask
 from flask_restful import Api, Resource
-from app.instance.config import config_app
+from app.settings.config import config_app
 import psycopg2
 import os
 
@@ -43,13 +47,13 @@ def create_app(configuration):
     app = Flask(__name__, instance_relative_config=True)
     api = Api(app)
     app.config.from_object(config_app[configuration])
-    from app.resources.entries_resource import AllEntries, SingleEntry
-    from app.resources.user_resource import SigninResource, SignupResource
+    from app.res.entries_resource import AllEntries, SingleEntry
+    from app.res.user_resource import Sign_in_res, Sign_up_res
 
     path = "/api/v1"
 
-    api.add_resource(SignupResource, path+'/auth/signup')
-    api.add_resource(SigninResource, path+'/auth/signin')
+    api.add_resource(Sign_up_res, path + '/auth/signup')
+    api.add_resource(Sign_in_res, path + '/auth/signin')
     api.add_resource(AllEntries, path+'/entries')
     api.add_resource(SingleEntry, path+'/entries/<int:entry_id>')
 

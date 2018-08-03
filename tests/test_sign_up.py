@@ -8,6 +8,8 @@ from app import create_app, DB_conns
 
 db = DB_conns()
 
+path = '/api/v1'
+
 
 class TestUsers(unittest.TestCase):
     """Test for users"""
@@ -28,36 +30,36 @@ class TestUsers(unittest.TestCase):
         """test post user register data"""
 
         # existing user
-        results = self.client.post('/api/v1/auth/signup', data=json.dumps(self.data), content_type='application/json')
+        results = self.client.post(path + 'auth/signup', data=json.dumps(self.data), content_type='application/json')
         self.assertEqual(results.status_code, 400)
         response = json.loads(results.data)
         self.assertEqual(response["message"], "The user already exists")
 
         # test username available
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+        rs = self.client.post(path + 'auth/signup', data=json.dumps({
             "name": "", "username": "byron", "password": "12341234", "email": "4dbyron@gmail.com"}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
         # test name validation
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+        rs = self.client.post(path + '/auth/signup', data=json.dumps({
             "name": "byrontaaka", "username": " ", "password": "12341234", "email": "4dbyron@gmail.com"}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
         # test password
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+        rs = self.client.post(path + '/auth/signup', data=json.dumps({
             "name": "byrontaaka", "username": "byron", "password": " ", "email": "4dbyron@gmail.com"}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 400)
         # tests email validation
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+        rs = self.client.post(path + '/auth/signup', data=json.dumps({
             "name": "byrontaaka", "username": "byron", "password": "12341234", "email": " "}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
         # user signup
-        rs = self.client.post('/api/v1/auth/signup', data=json.dumps({
+        rs = self.client.post(path + '/auth/signup', data=json.dumps({
             "name": "tester", "username": "tester", "password": "12341234", "email": "tester@gmail.com"}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 201)

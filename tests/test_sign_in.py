@@ -8,6 +8,8 @@ from app import create_app, DB_conns
 
 db = DB_conns()
 
+path = '/api/v1'
+
 
 class TestUsers(unittest.TestCase):
 
@@ -31,22 +33,22 @@ class TestUsers(unittest.TestCase):
         """Test user sign in"""
 
         # sign up a user
-        signup = self.client.post('/api/v1/auth/signup', data=json.dumps(self.data2), content_type='application/json')
+        signup = self.client.post(path + '/auth/signup', data=json.dumps(self.data2), content_type='application/json')
 
         # sign in an existing user
-        rs = self.client.post('/api/v1/auth/signin', data=json.dumps(self.data), content_type='application/json')
+        rs = self.client.post(path + 'auth/signin', data=json.dumps(self.data), content_type='application/json')
         self.assertEqual(rs.status_code, 201)
         rp = json.loads(rs.data)
         self.assertEqual(rp["message"], "You have successfully logged in")
 
         # validate user credentials
-        rs = self.client.post('/api/v1/auth/signin', data=json.dumps({
-            "username": "tester", "password": "1234"}),
+        rs = self.client.post(path + '/auth/signin', data=json.dumps({
+            "username": "tester", "password": "12341234"}),
                               content_type='application/json')
         self.assertEqual(rs.status_code, 400)
 
     def tests_access_token(self):
         """Test for token generation upon signin"""
-        rs = self.client.post('/api/v1/auth/signin', data=json.dumps(self.data), content_type='application/json')
+        rs = self.client.post(path + '/auth/signin', data=json.dumps(self.data), content_type='application/json')
         rp = json.loads(rs.data)
-        self.assertIn('token', rp)
+        self.assertIn('User not yet registered', rp)
