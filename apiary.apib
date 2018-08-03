@@ -19,14 +19,16 @@ Mydiary ensures this through the following measures.
 - Only a user with a valid token can manipulate entries
 
 # Working With MyDiary API.
-## Sign Up [/api/v1/auth/signup]
-### Register User [POST]
+
+## Sign Up [POST /api/v1/auth/signup]
+
 Register new user with
+
 + Request (application/json)
 
         {
             "username" : "byron",
-            "password" : "12341234"
+            "password" : "12341234",
             "email":"your_email@example.com"
         }
 
@@ -42,9 +44,10 @@ Register new user with
                 "message": "Registration was successful"
             }
 
-## Sign In [/api/v1/auth/signin]
-### Sign In User [POST]
+## Sign In User [POST /api/v1/auth/signin]
+
 Login
+
 + Request (application/json)
 
         {
@@ -66,9 +69,10 @@ Login
             }
 
 
-## Get All User entries [/api/v1/entries]
-### Fetch User entries [GET]
+## Fetch User entries [GET /api/v1/entries]
+
 returns all entries for that user
+
 + Request (application/json)
 
         {
@@ -98,13 +102,14 @@ returns all entries for that user
                         "story": "This is Andela",
                         "date_created": "Friday, 03 August, 2018"
                     }
-    ]
-}
+                ]
+            }
 
 
-## Get A Single User entry [/api/v1/entries/1]
-### Fetch a User entry [GET]
+## Fetch a Single User Entry [GET /api/v1/entries/1]
+
 returns an entry with the given id
+
 + Request (application/json)
 
         {
@@ -134,12 +139,114 @@ returns an entry with the given id
                         "story": "This is Andela sasa",
                         "date_created": "Friday, 03 August, 2018"
                     }
-    ]
-}
+            ]
+            }
 
 
-## Frequenty Asked Questions [/api/v1/faq]
+## Post a New Entry [POST /entries]
+
+Adds a new entry to MyDiary
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries
+            
+    + Body
+
+            {
+            "message": "You have successfully posted the entry",
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
 
 
-### Do I have to pay to use this API? [GET]
-This API is free to use or redistribute
+## Modify An Entry [PUT /api/v1/entries/3]
+
+changes the content of an entry
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries/3
+            
+    + Body
+
+            {
+                "message": "You have successfully updated the entry",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+## Detete An Entry [DELETE /api/v1/entries/2 ]
+this removes an entry from MyDiary's entry list
+
++ Request (application/json)
+
+        {
+        "x-access-token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/entries/2
+            
+    + Body
+
+            {
+                "message": "You have successfully Deleted the entry",
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1MzMxNTY0MjV9.k_tsNOkWdg1ubRF_k0Uiop42BUfMr2AUDh604P78jGE"
+            }
+
+
+
+### Frequenty Asked Questions [/api/v1/faq]
+
+## Do I have to pay to use this API? [GET /api/v1/faq/1]
+
++ Request (application/json)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/faq/1
+            
+    + Body
+
+            {
+                "message": "This API is free to use or redistribute"
+            }
+
+
+
+
+## Why do I get an error message when I try to post? [GET /api/v1/faq/10]
+
++ Request (application/json)
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /api/v1/faq/10
+            
+    + Body
+
+            {
+                "message": "Please ensure you have a valid token by loging in first"
+            }
