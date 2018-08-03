@@ -1,4 +1,7 @@
-"""Decorator.py"""
+"""Decorator.py
+learn from https://pastebin.com/hYnDpqZz
+and https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+"""
 
 from functools import wraps
 import jwt

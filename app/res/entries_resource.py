@@ -1,3 +1,7 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and http://flask.pocoo.org/
+"""
+
 import json
 from flask import jsonify, request
 from flask_restful import reqparse, Resource
@@ -12,17 +16,10 @@ class AllEntries(Resource):
     """Validate 'All entries' query request"""
     parser = reqparse.RequestParser()
     parser.add_argument(
-        'title',
-        required=True,
-        trim=True,
-        help='Entry title missing')
+        'title', required=True, trim=True, help='Entry title missing')
 
     parser.add_argument(
-        'body',
-        required=True,
-        type=str,
-        trim=True,
-        help='Entry body missing')
+        'body', required=True, type=str, trim=True, help='Entry body missing')
 
     @is_logged_in
     def post(self, user_id):

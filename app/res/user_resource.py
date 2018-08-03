@@ -1,3 +1,7 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and http://flask.pocoo.org/
+"""
+
 from flask import jsonify, json
 from flask_restful import reqparse, Resource, inputs
 import datetime
@@ -30,8 +34,6 @@ class Sign_up_res(Resource):
         email = sats.get('email')
 
         # Validate fields data
-        if len(username < 3 & password < 6):
-            return {'message': "User Name and Password are too short"}, 400
         if len(username) < 3:
             return {'message': "User name too short, should be at least 3 chars long"}, 400
         if len(password) < 6:

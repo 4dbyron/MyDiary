@@ -1,11 +1,7 @@
 """Set up environment specific configurations
     this is important in determining the verbosity of the app
 
-    usage
-            `export APP_SETTINGS="testing"`
-            `export SECRET="OwnDarkSecret"`
-            # where APP_SETTINGS can be testing, production or development
-
+code from https://pastebin.com/qUsLLv4H
 """
 
 import os

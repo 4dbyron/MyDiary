@@ -1,3 +1,7 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+"""
 from flask import Flask
 from flask_restful import Api, Resource
 from app.settings.config import config_app

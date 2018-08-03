@@ -1,3 +1,7 @@
+"""Learnt from https://scotch.io/tutorials/build-a-restful-api-with-flask-the-tdd-way
+and
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+"""
 import json
 from flask import jsonify
 from datetime import datetime
@@ -42,17 +46,12 @@ class Entries:
 
         if entry_id:
             # Get Single Entry
-            db.query(
-                "SELECT * FROM entries WHERE user_id=%s AND entry_id=%s",
-                (user_id, entry_id)
-            )
+            db.query("SELECT * FROM entries WHERE user_id=%s AND entry_id=%s", (user_id, entry_id))
             entries = db.cur.fetchall()
             return entries
         else:
             # Get all user entries
-            db.query(
-                "SELECT * FROM entries WHERE user_id = %s", [user_id]
-            )
+            db.query("SELECT * FROM entries WHERE user_id = %s", [user_id])
             entry = db.cur.fetchall()
             return entry
 
